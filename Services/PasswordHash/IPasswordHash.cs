@@ -1,9 +1,10 @@
-﻿namespace EnterpriseAuthentication_MicroAPI.Services.PasswordHash;
+﻿using EnterpriseAuthentication_MicroAPI.Services.DataAccess.DTOs;
+using EnterpriseAuthentication_MicroAPI.Services.PasswordHash.DTOs;
+
+namespace EnterpriseAuthentication_MicroAPI.Services.PasswordHash;
 
 public interface IPasswordHash
 {
-    
-    public string HashPassword();
-    public bool VerifyPassword();
-    
+    public HashDTO HashPassword(UserDTO user);
+    public bool VerifyPassword(UserDTO loginrequest);
 }

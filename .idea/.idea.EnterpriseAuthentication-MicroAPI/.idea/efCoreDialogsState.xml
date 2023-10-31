@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EfCoreDialogsState">
+    <option name="keyValueStorage">
+      <map>
+        <entry key="Common:45132d7f-4f54-4f31-887e-eb523eda413a:dbContext" value="EnterpriseAuthentication_MicroAPI.Data.DataContext" />
+        <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:noBuild" value="false" />
+        <entry key="Common:outputFolder" value="Data\Migrations" />
+      </map>
+    </option>
+  </component>
+</project>

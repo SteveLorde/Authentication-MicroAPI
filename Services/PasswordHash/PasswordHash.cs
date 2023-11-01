@@ -17,11 +17,11 @@ class PasswordHash : IPasswordHash
         _db = db;
     }
 
-    public HashDTO HashPassword(UserDTO user)
+    public Hash HashPassword(UserDTO user)
     {
         string salt = GenerateSalt();
         string hashedpassword = GenerateHashedPassword(user.password, salt);
-        HashDTO userhash = new HashDTO
+        Hash userhash = new Hash()
         {
             hash = hashedpassword,
             salt = salt

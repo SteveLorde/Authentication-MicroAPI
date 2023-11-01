@@ -1,6 +1,6 @@
 namespace EnterpriseAuthentication_MicroAPI.Services.DataAccess.DTOs;
 
-public interface UserDTO
+public class UserDTO
 {
     public string name { get; set; }
     public string username { get; set; }

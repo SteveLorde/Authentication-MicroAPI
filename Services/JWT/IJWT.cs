@@ -5,6 +5,6 @@ namespace EnterpriseAuthentication_MicroAPI.Services.JWT;
 
 public interface IJWT
 {
-    public void CreateToken(UserDTO user);
+    public string CreateToken(UserDTO user);
     public void VerifyToken(Token token);
 }

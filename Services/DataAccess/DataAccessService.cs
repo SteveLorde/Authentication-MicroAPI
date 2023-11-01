@@ -2,6 +2,7 @@
 using EnterpriseAuthentication_MicroAPI.Data.Models;
 using EnterpriseAuthentication_MicroAPI.Services.DataAccess.DTOs;
 using EnterpriseAuthentication_MicroAPI.Services.PasswordHash;
+using EnterpriseAuthentication_MicroAPI.Services.PasswordHash.DTOs;
 
 namespace EnterpriseAuthentication_MicroAPI.Services.DataAccess;
 
@@ -31,7 +32,7 @@ class DataAccessService : IDataAccessService
     public void CreateUser(UserDTO usertoregister)
     {
         //get hashed password
-        var hashdata = _pass.HashPassword(usertoregister);
+        Hash hashdata = _pass.HashPassword(usertoregister);
 
         User newuser = new User
         {

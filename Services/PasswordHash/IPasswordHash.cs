@@ -5,6 +5,6 @@ namespace EnterpriseAuthentication_MicroAPI.Services.PasswordHash;
 
 public interface IPasswordHash
 {
-    public HashDTO HashPassword(UserDTO user);
+    public Hash HashPassword(UserDTO user);
     public bool VerifyPassword(UserDTO loginrequest);
 }

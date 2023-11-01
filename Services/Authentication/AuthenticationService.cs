@@ -16,7 +16,7 @@ class AuthenticationService : IAuthenticationService
         _hashservice = hashservice;
     }
     
-        public async Task<bool> LoginUser(UserDTO loginrequest)
+        public bool LoginUser(UserDTO loginrequest)
     {
         try
         {
@@ -39,14 +39,13 @@ class AuthenticationService : IAuthenticationService
             
             return checklogin;
         }
-        
         catch (Exception ex)
         {
             throw ex;
         }
     }
 
-    public async Task<bool> RegisterUser(UserDTO registerrequest)
+    public bool RegisterUser(UserDTO registerrequest)
     {
         try
         {

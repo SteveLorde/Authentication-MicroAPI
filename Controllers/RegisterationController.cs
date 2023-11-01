@@ -1,7 +1,7 @@
 ﻿using EnterpriseAuthentication_MicroAPI.Services.DataAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EnterpriseAuthentication_MicroAPI.Controllers.Registration;
+namespace EnterpriseAuthentication_MicroAPI.Controllers;
 
 public class RegisterationController : Controller
 {

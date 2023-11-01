@@ -17,7 +17,7 @@ class PasswordHash : IPasswordHash
         _db = db;
     }
 
-    public Hash HashPassword(UserDTO user)
+    public async Task<Hash> HashPassword(UserDTO user)
     {
         string salt = GenerateSalt();
         string hashedpassword = GenerateHashedPassword(user.password, salt);
@@ -44,9 +44,9 @@ class PasswordHash : IPasswordHash
         return hashedpassword;
     }
 
-    public bool VerifyPassword(UserDTO loginrequest)
+    public async Task<bool> VerifyPassword(UserDTO loginrequest)
     {
-        User usertoverfiy = _db.Users.First(x => x.username == loginrequest.username);
+        User usertoverfiy = await _db.Users.FirstAsync(x => x.username == loginrequest.username);
         string passwordtoverify = GenerateHashedPassword(loginrequest.password, usertoverfiy.saltpassword);
 
         if (passwordtoverify == usertoverfiy.hashedpassword)

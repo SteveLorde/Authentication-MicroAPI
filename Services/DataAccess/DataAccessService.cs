@@ -19,20 +19,20 @@ class DataAccessService : IDataAccessService
     }
     
     
-    public void GetUsers()
+    public async Task GetUsers()
     {
         throw new NotImplementedException();
     }
 
-    public void GetUser(int username)
+    public async Task GetUser(int username)
     {
         throw new NotImplementedException();
     }
 
-    public void CreateUser(UserDTO usertoregister)
+    public async Task CreateUser(UserDTO usertoregister)
     {
         //get hashed password
-        Hash hashdata = _pass.HashPassword(usertoregister);
+        Hash hashdata = await _pass.HashPassword(usertoregister);
 
         User newuser = new User
         {
@@ -45,7 +45,8 @@ class DataAccessService : IDataAccessService
             corporaterole = usertoregister.role,
             department = usertoregister.department
         };
-        
-        
+
+        await _db.Users.AddAsync(newuser);
+
     }
 }

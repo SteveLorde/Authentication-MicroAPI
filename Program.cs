@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>();
-builder.Services.AddTransient<IJWT, Jwt>();
+builder.Services.AddTransient<IJWT,Jwt>();
 builder.Services.AddTransient<IDataAccessService, DataAccessService>();
 builder.Services.AddTransient<IPasswordHash, PasswordHash>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
@@ -32,9 +32,7 @@ builder.Services.AddAuthentication(options => {
         ValidateAudience = true,        
         ValidateLifetime = true,        
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("123456")),
-        ValidIssuer = "your-issuer",
-        ValidAudience = "your-audience"
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("123456"))
     };
 } );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -20,7 +20,7 @@ public class LoginController : Controller
     }
     
     [HttpPost("Login")]
-    public IActionResult Login(string username, string password)
+    public async Task<IActionResult> Login(string username, string password)
     {
         UserDTO userlogin = new UserDTO()
         {
@@ -28,10 +28,10 @@ public class LoginController : Controller
             password = password
         };
         //check password
-        var check = _auth.LoginUser(userlogin);
+        var check = await _auth.LoginUser(userlogin);
         if (check)
         {
-            string token = _jwt.CreateToken(userlogin);
+            var token = _jwt.CreateToken(userlogin);
             return Ok(token);
         }
         else
@@ -39,7 +39,4 @@ public class LoginController : Controller
             return Ok(false + " login failed");
         }
     }
-    
-    
-    
 }

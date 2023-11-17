@@ -4,6 +4,6 @@ namespace EnterpriseAuthentication_MicroAPI.Services.Authentication;
 
 public interface IAuthenticationService
 {
-    public bool LoginUser(UserDTO loginrequest);
-    public bool RegisterUser(UserDTO registerrequest);
+    public Task<bool> LoginUser(UserDTO loginrequest);
+    public Task<bool> RegisterUser(UserDTO registerrequest);
 }

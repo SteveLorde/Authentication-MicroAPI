@@ -13,7 +13,6 @@ namespace EnterpriseAuthentication_MicroAPI.Controllers;
 public class EditController : Controller
 {
     private IJWT _jwt;
-
     private IAuthenticationService _auth;
 
     public EditController(IJWT jwt, IAuthenticationService auth)
@@ -23,13 +22,15 @@ public class EditController : Controller
     }
     
     [HttpPost("UpdateUser")]
-    public IActionResult UpdateUser(UserDTO updateduser)
+    public async Task<IActionResult> UpdateUser(UserDTO updateduser)
     {
-        
-        
-        
-        
-        
+
+        return Ok(true);
+    }
+    
+    [HttpDelete("DeleteUser")]
+    public async Task<IActionResult> DeleteuUser(UserDTO updateduser)
+    {
         return Ok(true);
     }
     

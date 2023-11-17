@@ -1,6 +1,9 @@
 ﻿using EnterpriseAuthentication_MicroAPI.Data;
+using EnterpriseAuthentication_MicroAPI.Data.Models;
 using EnterpriseAuthentication_MicroAPI.Services.DataAccess.DTOs;
 using EnterpriseAuthentication_MicroAPI.Services.PasswordHash;
+using EnterpriseAuthentication_MicroAPI.Services.PasswordHash.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace EnterpriseAuthentication_MicroAPI.Services.Authentication;
 
@@ -16,7 +19,7 @@ class AuthenticationService : IAuthenticationService
         _hashservice = hashservice;
     }
     
-        public bool LoginUser(UserDTO loginrequest)
+        public async Task<bool> LoginUser(UserDTO loginrequest)
     {
         try
         {
@@ -26,7 +29,7 @@ class AuthenticationService : IAuthenticationService
             if (checkuser)
             {
                 //2nd verify password
-                bool checkpassword = _hashservice.VerifyPassword(loginrequest);
+                bool checkpassword = await _hashservice.VerifyPassword(loginrequest);
                 if (checkpassword)
                 {
                     checklogin = true;
@@ -45,11 +48,32 @@ class AuthenticationService : IAuthenticationService
         }
     }
 
-    public bool RegisterUser(UserDTO registerrequest)
+    public async Task<bool> RegisterUser(UserDTO registerrequest)
     {
         try
         {
-            return true;
+            bool checkifexist = await _db.Users.AnyAsync(x => x.username == registerrequest.username);
+            if (!checkifexist)
+            {
+                Hash newpassword = await _hashservice.HashPassword(registerrequest);
+                User newuser = new User
+                {
+                    corporateid = registerrequest.corporateid,
+                    name = registerrequest.name,
+                    username = registerrequest.username,
+                    saltpassword = newpassword.salt,
+                    hashedpassword = newpassword.hash,
+                    corporaterole = registerrequest.role,
+                    department = registerrequest.department
+                };
+                await _db.Users.AddAsync(newuser);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         catch (Exception ex)
         {

@@ -1,13 +1,28 @@
-﻿using EnterpriseAuthentication_MicroAPI.Services.DataAccess.DTOs;
+﻿using EnterpriseAuthentication_MicroAPI.Services.Authentication;
+using EnterpriseAuthentication_MicroAPI.Services.DataAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnterpriseAuthentication_MicroAPI.Controllers;
 
+[ApiController]
+[Route("Register")]
 public class RegisterationController : Controller
 {
-    // POST REGISTER
-    public IActionResult Register(UserDTO newuser)
+    
+    private IAuthenticationService _auth;
+
+    public RegisterationController(IAuthenticationService auth)
     {
-        return Ok();
+        _auth = auth;
     }
+    
+    // POST REGISTER
+    [HttpPost("RegisterUser")]
+    public async Task<IActionResult> Register(UserDTO newuser)
+    {
+        bool check = await _auth.RegisterUser(newuser);
+        return Ok(check);
+    }
+
+
 }
